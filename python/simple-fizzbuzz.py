@@ -1,4 +1,4 @@
-# This is a very simple and procedural approach to FizzBuzz.
+# This is a naive and procedural approach to FizzBuzz.
 
 def fizzbuzz():
     for i in range(1, 100):
@@ -15,3 +15,8 @@ def fizzbuzz():
             print(i)
 
 fizzbuzz()
+
+## Pros: it works, BUT...
+
+## Cons: ...only for this limited use case...
+##       ...it's repetetive...
