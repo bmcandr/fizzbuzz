@@ -14,7 +14,7 @@ def fizzbuzz(rng: list, triggers: list) -> list:
 
 result = fizzbuzz(range(1, 100), [
     {'text' : 'Fizz', 'trigger' : lambda i: i % 3 == 0},
-    {'text' : 'Buzz', 'trigger' : lambda i: i % 5 == 0},
+    {'text' : 'Buzz', 'trigger' : lambda i: i % 5 == 0}
 ])
 
 print(result)
