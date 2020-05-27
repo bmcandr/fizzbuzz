@@ -1,4 +1,4 @@
-# This version takes a functional programming approach. The loop from previous versions is replaced with a call to map.
+# This version takes a, probably unnecessarily, strict functional programming approach.
 
 from functools import reduce
 
@@ -18,3 +18,7 @@ result = fizzbuzz(range(1, 100), [
 ])
 
 print(result)
+
+## Pros: it works, it's concsise
+## Cons: it's difficult to understand
+##       it's overengineered (YAGNI)
