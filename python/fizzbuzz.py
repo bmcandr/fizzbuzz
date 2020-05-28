@@ -1,16 +1,20 @@
 from functools import reduce
 
 
-# This is a naive and procedural approach to FizzBuzz.
-# Pros: it works, BUT...
-# Cons: ...only for this limited use case...
-#       ...it's repetetive...
-#
-# Example call:
-# naive_fizzbuzz()
-
-
 def naive_fizzbuzz():
+    """
+    Prints each integer from 1-100, but instead prints "Fizz" for multiples of three and "Buzz"
+    for the multiples of five . For numbers which are multiples of both three and five print "FizzBuzz".
+
+    This is a naive and procedural approach to FizzBuzz.
+
+    Pros: it works, BUT...
+    Cons: ...only for this limited use case...
+          ...it's repetetive...
+
+    Example call:
+    >>> naive_fizzbuzz()
+    """
     for i in range(1, 100):
         mod3 = (i % 3 == 0)
         mod5 = (i % 5 == 0)
@@ -24,16 +28,22 @@ def naive_fizzbuzz():
         else:
             print(i)
 
-# This is an improved, but still naive and procedural approach to FizzBuzz.
-# Pros: it works, BUT...
-# Cons: ...still only for this limited use case...
-#       ...it's still repetitive...
-#
-# Example call:
-# improved_naive_fizzbuzz()
-
 
 def improved_naive_fizzbuzz():
+    """
+    Prints each integer from 1-100, but instead prints "Fizz" for multiples of three and "Buzz"
+    for the multiples of five . For numbers which are multiples of both three and five print "FizzBuzz".
+
+    This is an improved, but still naive and procedural approach to FizzBuzz.
+
+    Pros: it works, BUT...
+    Cons: ...still only for this limited use case...
+          ...it's still repetitive...
+
+    Example call:
+    >>> improved_naive_fizzbuzz()
+    """
+
     fizz = 'fizz'
     buzz = 'buzz'
 
@@ -54,18 +64,32 @@ def improved_naive_fizzbuzz():
             print(i)
 
 
-# This is a parameterized, and still procedural, approach to FizzBuzz.
-# Pros: less repetitive and more flexible
-# Cons: The loop might not be the most efficient approach...
-
-# Example call:
-# parameterized_fizzbuzz(range(1, 100),[
-#     ('Fizz', lambda i: i % 3 == 0),
-#     ('Buzz', lambda i: i % 5 == 0)
-# ])
-
-
 def parameterized_fizzbuzz(rng: list, triggers: list):
+    """
+    Prints each element in rng except where the conditions in list are triggered and the text associated
+    with that trigger is printed.
+
+    This is a parameterized, and still procedural, approach to FizzBuzz.
+
+    Pros: less repetitive and more flexible
+    Cons: The loop might not be the most efficient approach...
+
+    Example call:
+    >>> parameterized_fizzbuzz(range(10, 16), [
+    ... ('Fizz', lambda i: i % 3 == 0),
+    ... ('Buzz', lambda i: i % 5 == 0)
+    ... ])
+    Buzz
+    11
+    Fizz
+    13
+    14
+    FizzBuzz
+
+    :param rng: a list
+    :param triggers: a list of tuples of text to print and lambda function of condition that triggers text
+    :return: None
+    """
     for i in rng:
         result = ''
         for text, trigger in triggers:
@@ -74,15 +98,23 @@ def parameterized_fizzbuzz(rng: list, triggers: list):
         print(result or i)
 
 
-# This version takes a functional programming approach. The loop from previous versions is replaced with a call to map.
-
-# Example call:
-# simple_fp_fizzbuzz(range(1, 100), [
-#     ('Fizz', lambda i: i % 3 == 0),
-#     ('Buzz', lambda i: i % 5 == 0)
-# ])
-
 def simple_fp_fizzbuzz(rng: list, triggers: list) -> list:
+    """
+    Returns a list of elements in rng except where elements are replaced based on conditions in triggers.
+
+    This version takes a functional programming approach. The loop from previous versions is replaced with a call to map.
+
+    Example call:
+    >>> simple_fp_fizzbuzz(range(10, 16), [
+    ... ('Fizz', lambda i: i % 3 == 0),
+    ... ('Buzz', lambda i: i % 5 == 0)
+    ... ])
+    ['Buzz', 11, 'Fizz', 13, 14, 'FizzBuzz']
+
+    :param rng: a list
+    :param triggers: a list of tuples containing an object and a boolean lambda function
+    :return: list
+    """
     def evaluate(i):
         result = ''
         for (text, predicate) in triggers:
@@ -90,23 +122,31 @@ def simple_fp_fizzbuzz(rng: list, triggers: list) -> list:
                 result += text
         return result or i
 
-    print(list(map(evaluate, rng)))
+    return list(map(evaluate, rng))
 
-
-# This version takes a, probably unnecessarily, strict functional programming approach.
-# Pros: it works
-#       it's concsise
-# Cons: it's difficult to understand
-#       it's overengineered (YAGNI)
-
-# Example call:
-# complex_fp_fizzbuzz(range(1, 100), [
-#     {'text' : 'Fizz', 'trigger' : lambda i: i % 3 == 0},
-#     {'text' : 'Buzz', 'trigger' : lambda i: i % 5 == 0}
-# ])
 
 def complex_fp_fizzbuzz(rng: list, triggers: list) -> list:
+    """
+    Returns a list of elements in rng except where elements are replaced based on conditions in triggers.
 
+    This version takes a strict functional programming approach.
+
+    Pros: it works
+          it's concsise
+    Cons: it's difficult to understand
+          it's overengineered (YAGNI)
+
+    Example call:
+    >>> complex_fp_fizzbuzz(range(10, 16), [
+    ... {'text' : 'Fizz', 'trigger' : lambda i: i % 3 == 0},
+    ... {'text' : 'Buzz', 'trigger' : lambda i: i % 5 == 0}
+    ... ])
+    ['Buzz', 11, 'Fizz', 13, 14, 'FizzBuzz']
+
+    :param rng: a list
+    :param triggers: a list of tuples containing an object and a boolean lambda function
+    :return: list
+    """
     # return text if trigger is true; if none are true, return i
     def evaluate(i):
         # filter triggers to those that evaluate to true
@@ -120,6 +160,6 @@ def complex_fp_fizzbuzz(rng: list, triggers: list) -> list:
 
 # This will be an approach that uses functional programming and lazy generation (i.e., enumerators/generators).
 
-def lazy_gen_fizzbuzz(rng: list, triggers: list) -> list:
-    # A project for another day...
-    return []
+# def lazy_gen_fizzbuzz(rng: list, triggers: list) -> list:
+#     # A project for another day...
+#     return []
