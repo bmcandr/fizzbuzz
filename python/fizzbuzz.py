@@ -129,8 +129,8 @@ def complex_fp_fizzbuzz(rng: list, triggers: list) -> list:
     This version takes a strict functional programming approach.
 
     Pros: it works
-          it's concsise
-    Cons: it's difficult to understand
+          it's concise
+    Cons: it's difficult to read
           it's overengineered (YAGNI)
 
     Usage:
@@ -141,7 +141,7 @@ def complex_fp_fizzbuzz(rng: list, triggers: list) -> list:
     ['Buzz', 11, 'Fizz', 13, 14, 'FizzBuzz']
 
     :param rng: a list
-    :param triggers: a list of tuples containing an object and a boolean lambda function
+    :param triggers: a list of dictionaries containing an object and a boolean lambda function
     :return: list
     """
     # return text if trigger is true; if none are true, return i
@@ -158,7 +158,13 @@ def complex_fp_fizzbuzz(rng: list, triggers: list) -> list:
 
 def lazy_gen_fizzbuzz(start: int=1, end: int=16, triggers: list=[]):
     """
-    This will be an approach that uses functional programming and lazy generation (i.e., enumerators/generators).
+    This will be an approach that uses functional programming and lazy generation (i.e., enumerators/generators). This approach is more memory safe if you're FizzBuzz-ing into infinity.
+
+    Pros: it works
+          it's concise
+          it does not consume memory
+    Cons: it's difficult to read
+          it's overengineered (YAGNI)
 
     Usage:
     >>> for x in lazy_gen_fizzbuzz(triggers=[
@@ -167,13 +173,18 @@ def lazy_gen_fizzbuzz(start: int=1, end: int=16, triggers: list=[]):
     ...     ]):
     ...     print(x, end=" ")
     1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz 
+
+    :param start: an integer to start at (default=1)
+    :param end: an integer to end at (default=16)
+    :param triggers: a list of dictionaries containing an object and a boolean lambda function
+    :return: list
     """
 
     i = start
     while i < end:
         # filter triggers to those that evaluate to true
         parts = list(filter((lambda j: j['trigger'](i)), triggers))
-        # return combined text of true triggers if parts is not empty, otherwise return i
+        # yield combined text of true triggers if parts is not empty, otherwise return i
         yield reduce(lambda x, y: x + y, map(lambda part: part['text'], parts)) if parts else i
         i += 1
 
