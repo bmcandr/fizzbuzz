@@ -20,13 +20,13 @@ def naive_fizzbuzz():
         mod5 = (i % 5 == 0)
 
         if mod3 and (not mod5):
-            print('Fizz')
+            print('Fizz', end=" ")
         elif mod5 and (not mod3):
-            print('Buzz')
+            print('Buzz', end=" ")
         elif mod3 and mod5:
-            print('FizzBuzz')
+            print('FizzBuzz', end=" ")
         else:
-            print(i)
+            print(i, end=" ")
 
 
 def improved_naive_fizzbuzz():
@@ -55,13 +55,13 @@ def improved_naive_fizzbuzz():
         mod5 = divisible_by(i, 5)
 
         if mod3 and (not mod5):
-            print(fizz)
+            print(fizz, end=" ")
         elif mod5 and (not mod3):
-            print(buzz)
+            print(buzz, end=" ")
         elif mod3 and mod5:
-            print(fizz + buzz)
+            print(fizz + buzz, end=" ")
         else:
-            print(i)
+            print(i, end=" ")
 
 
 def parameterized_fizzbuzz(rng: list, triggers: list):
@@ -75,16 +75,11 @@ def parameterized_fizzbuzz(rng: list, triggers: list):
     Cons: The loop might not be the most efficient approach...
 
     Example call:
-    >>> parameterized_fizzbuzz(range(10, 16), [
+    >>> parameterized_fizzbuzz(range(1, 16), [
     ... ('Fizz', lambda i: i % 3 == 0),
     ... ('Buzz', lambda i: i % 5 == 0)
     ... ])
-    Buzz
-    11
-    Fizz
-    13
-    14
-    FizzBuzz
+    1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz
 
     :param rng: a list
     :param triggers: a list of tuples of text to print and lambda function of condition that triggers text
@@ -95,7 +90,7 @@ def parameterized_fizzbuzz(rng: list, triggers: list):
         for text, trigger in triggers:
             if trigger(i):
                 result += text
-        print(result or i)
+        print(result or i, end = " ")
 
 
 def simple_fp_fizzbuzz(rng: list, triggers: list) -> list:
@@ -158,8 +153,25 @@ def complex_fp_fizzbuzz(rng: list, triggers: list) -> list:
     return list(map(evaluate, rng))
 
 
-# This will be an approach that uses functional programming and lazy generation (i.e., enumerators/generators).
 
-# def lazy_gen_fizzbuzz(rng: list, triggers: list) -> list:
-#     # A project for another day...
-#     return []
+def lazy_gen_fizzbuzz(start: int=1, end: int=16, triggers: list=[]):
+    """
+    This will be an approach that uses functional programming and lazy generation (i.e., enumerators/generators).
+
+    Usage:
+    >>> for x in lazy_gen_fizzbuzz(triggers=[
+    ...     {'text' : 'Fizz', 'trigger' : lambda i: i % 3 == 0},
+    ...     {'text' : 'Buzz', 'trigger' : lambda i: i % 5 == 0}
+    ...     ]):
+    ...     print(x, end=" ")
+    1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz
+    """
+
+    i = start
+    while i < end:
+        # filter triggers to those that evaluate to true
+        parts = list(filter((lambda j: j['trigger'](i)), triggers))
+        # return combined text of true triggers if parts is not empty, otherwise return i
+        yield reduce(lambda x, y: x + y, map(lambda part: part['text'], parts)) if parts else i
+        i += 1
+
