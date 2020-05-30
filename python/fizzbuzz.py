@@ -12,9 +12,9 @@ def naive_fizzbuzz():
     Cons: ...only for this limited use case...
           ...it's repetetive...
 
-    Example call:
+    Usage:
     >>> naive_fizzbuzz()
-    1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz 16 17 Fizz 19 Buzz Fizz 22 23 Fizz Buzz 26 Fizz 28 29 FizzBuzz 31 32 Fizz 34 Buzz Fizz 37 38 Fizz Buzz 41 Fizz 43 44 FizzBuzz 46 47 Fizz 49 Buzz Fizz 52 53 Fizz Buzz 56 Fizz 58 59 FizzBuzz 61 62 Fizz 64 Buzz Fizz 67 68 Fizz Buzz 71 Fizz 73 74 FizzBuzz 76 77 Fizz 79 Buzz Fizz 82 83 Fizz Buzz 86 Fizz 88 89 FizzBuzz 91 92 Fizz 94 Buzz Fizz 97 98 Fizz
+    1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz 16 17 Fizz 19 Buzz Fizz 22 23 Fizz Buzz 26 Fizz 28 29 FizzBuzz 31 32 Fizz 34 Buzz Fizz 37 38 Fizz Buzz 41 Fizz 43 44 FizzBuzz 46 47 Fizz 49 Buzz Fizz 52 53 Fizz Buzz 56 Fizz 58 59 FizzBuzz 61 62 Fizz 64 Buzz Fizz 67 68 Fizz Buzz 71 Fizz 73 74 FizzBuzz 76 77 Fizz 79 Buzz Fizz 82 83 Fizz Buzz 86 Fizz 88 89 FizzBuzz 91 92 Fizz 94 Buzz Fizz 97 98 Fizz 
     """
     for i in range(1, 100):
         mod3 = (i % 3 == 0)
@@ -41,12 +41,13 @@ def improved_naive_fizzbuzz():
     Cons: ...still only for this limited use case...
           ...it's still repetitive...
 
-    Example call:
+    Usage:
     >>> improved_naive_fizzbuzz()
+    1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz 16 17 Fizz 19 Buzz Fizz 22 23 Fizz Buzz 26 Fizz 28 29 FizzBuzz 31 32 Fizz 34 Buzz Fizz 37 38 Fizz Buzz 41 Fizz 43 44 FizzBuzz 46 47 Fizz 49 Buzz Fizz 52 53 Fizz Buzz 56 Fizz 58 59 FizzBuzz 61 62 Fizz 64 Buzz Fizz 67 68 Fizz Buzz 71 Fizz 73 74 FizzBuzz 76 77 Fizz 79 Buzz Fizz 82 83 Fizz Buzz 86 Fizz 88 89 FizzBuzz 91 92 Fizz 94 Buzz Fizz 97 98 Fizz 
     """
 
-    fizz = 'fizz'
-    buzz = 'buzz'
+    fizz = 'Fizz'
+    buzz = 'Buzz'
 
     def divisible_by(numerator, denominator):
         return numerator % denominator == 0
@@ -75,12 +76,12 @@ def parameterized_fizzbuzz(rng: list, triggers: list):
     Pros: less repetitive and more flexible
     Cons: The loop might not be the most efficient approach...
 
-    Example call:
+    Usage:
     >>> parameterized_fizzbuzz(range(1, 16), [
     ... ('Fizz', lambda i: i % 3 == 0),
     ... ('Buzz', lambda i: i % 5 == 0)
     ... ])
-    1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz
+    1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz 
 
     :param rng: a list
     :param triggers: a list of tuples of text to print and lambda function of condition that triggers text
@@ -100,7 +101,7 @@ def simple_fp_fizzbuzz(rng: list, triggers: list) -> list:
 
     This version takes a functional programming approach. The loop from previous versions is replaced with a call to map.
 
-    Example call:
+    Usage:
     >>> simple_fp_fizzbuzz(range(10, 16), [
     ... ('Fizz', lambda i: i % 3 == 0),
     ... ('Buzz', lambda i: i % 5 == 0)
@@ -132,7 +133,7 @@ def complex_fp_fizzbuzz(rng: list, triggers: list) -> list:
     Cons: it's difficult to understand
           it's overengineered (YAGNI)
 
-    Example call:
+    Usage:
     >>> complex_fp_fizzbuzz(range(10, 16), [
     ... {'text' : 'Fizz', 'trigger' : lambda i: i % 3 == 0},
     ... {'text' : 'Buzz', 'trigger' : lambda i: i % 5 == 0}
@@ -165,7 +166,7 @@ def lazy_gen_fizzbuzz(start: int=1, end: int=16, triggers: list=[]):
     ...     {'text' : 'Buzz', 'trigger' : lambda i: i % 5 == 0}
     ...     ]):
     ...     print(x, end=" ")
-    1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz
+    1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz 
     """
 
     i = start
