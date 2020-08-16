@@ -1,9 +1,7 @@
 program fizzbuzz
   use simple_fizzbuzz_mod, only : simple_fizzbuzz
-  integer :: start, end
-
-  start = 1
-  end = 101
+  integer, parameter :: start = 1
+  integer, parameter ::  end = 101
 
   !call naive_fizzbuzz()
   call simple_fizzbuzz(start, end)
