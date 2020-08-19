@@ -11,8 +11,6 @@ end program fizzbuzz
 subroutine naive_fizzbuzz()
   integer :: i = 1
   
-  print *, "Beginning Fizzbuzz from", start, "to", end, "..."
-  
   do while(i < 16)
      if ( modulo(i,3).eq.0 .and. modulo(i,5).eq.0 ) then
         write(*,*) "Fizzbuzz"
@@ -29,6 +27,8 @@ subroutine naive_fizzbuzz()
 end subroutine naive_fizzbuzz
 
 module simple_fizzbuzz_mod
+  ! Reduces code reuse at the expense of overall length.
+  ! Slight gain in flexiility?
   implicit none
 
   contains
@@ -50,15 +50,14 @@ module simple_fizzbuzz_mod
     integer :: iter
 
     iter = start
-    print *, "Beginning Fizzbuzz from", start, "to", end, "..."
 
     do while(iter < end)
 
        if ( (divisible_by(iter,3)) .and. divisible_by(iter,5) ) then
           write(*,*) "Fizzbuzz"
-       elseif ( modulo(iter,3).eq.0 ) then
+       elseif ( divisible_by(iter,3) ) then
           write(*,*) "Fizz"
-       elseif ( modulo(iter,5).eq.0 ) then
+       elseif ( divisible_by(iter,5) ) then
           write(*,*) "Buzz"
        else
           write(*,'(I3)') iter
