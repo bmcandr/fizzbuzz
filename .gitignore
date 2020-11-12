@@ -4,3 +4,4 @@ __pycache__/
 a.out
 fizzbuzz
 *.mod
+simple_fizzbuzz_mod.o
