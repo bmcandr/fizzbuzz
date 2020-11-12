@@ -1,5 +1,7 @@
 program fizzbuzz
+  use utils, only: read_range
   use simple_fizzbuzz_mod, only : simple_fizzbuzz
+  
   integer :: start, end
 
   call read_range(start, end)
@@ -8,33 +10,6 @@ program fizzbuzz
   call simple_fizzbuzz(start, end)
   
 end program fizzbuzz
-
-subroutine read_range(start, end)
-  integer, intent(out) :: start, end
-
-  write(*,*) 'Enter an integer to start at: '
-  call read_input(start)
-     
-  write(*,*) 'Enter an integer to end at: '
-  call read_input(end)
-     
-end subroutine read_range
-
-subroutine read_input(value)
-  integer, intent(out) :: value
-  integer :: ierror
-
-  do
-     read (*, '(i10)', iostat=ierror) value
-
-     if ( ierror == 0) then
-        exit
-     else
-        write(*,*) 'Please enter an integer...'
-     endif
-  enddo
-  
-end subroutine read_input
 
 subroutine naive_fizzbuzz()
   integer :: i = 1
