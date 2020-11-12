@@ -1,55 +1,40 @@
-module simple_fizzbuzz_mod
-  ! Reduces code reuse at the expense of overall length.
-  ! Slight gain in flexibility?
-  implicit none
-
-  contains
-
-  function divisible_by(num, denom)
-    integer, intent(in) :: num, denom
-    logical :: divisible_by
-
-    divisible_by = .false.
-
-    if( modulo(num, denom) .eq. 0 ) then
-       divisible_by = .true.
-    end if
-
-  end function divisible_by
-
-  subroutine simple_fizzbuzz(start, end)
-    integer, intent(in) :: start, end
-    integer :: iter
-
-    iter = start
-
-    do while(iter < end)
-
-       if ( (divisible_by(iter,3)) .and. divisible_by(iter,5) ) then
-          write(*,*) "Fizzbuzz"
-       elseif ( divisible_by(iter,3) ) then
-          write(*,*) "Fizz"
-       elseif ( divisible_by(iter,5) ) then
-          write(*,*) "Buzz"
-       else
-          write(*,'(I3)') iter
-       end if
-       iter = iter + 1
-    enddo
-
-  end subroutine simple_fizzbuzz
-
-end module simple_fizzbuzz_mod
-
 program fizzbuzz
   use simple_fizzbuzz_mod, only : simple_fizzbuzz
-  integer, parameter :: start = 1
-  integer, parameter ::  end = 101
+  integer :: start, end
+
+  call read_range(start, end)
 
   !call naive_fizzbuzz()
   call simple_fizzbuzz(start, end)
   
 end program fizzbuzz
+
+subroutine read_range(start, end)
+  integer, intent(out) :: start, end
+
+  write(*,*) 'Enter an integer to start at: '
+  call read_input(start)
+     
+  write(*,*) 'Enter an integer to end at: '
+  call read_input(end)
+     
+end subroutine read_range
+
+subroutine read_input(value)
+  integer, intent(out) :: value
+  integer :: ierror
+
+  do
+     read (*, '(i10)', iostat=ierror) value
+
+     if ( ierror == 0) then
+        exit
+     else
+        write(*,*) 'Please enter an integer...'
+     endif
+  enddo
+  
+end subroutine read_input
 
 subroutine naive_fizzbuzz()
   integer :: i = 1
