@@ -5,3 +5,4 @@ a.out
 fizzbuzz
 *.mod
 simple_fizzbuzz_mod.o
+fortran/obj
