@@ -1,7 +1,12 @@
-fizzbuzz: fizzbuzz.f90
-	gfortran $< -o $@
+MODS = simple_fizzbuzz_mod.o
 
-.PHONY: clean
+fizzbuzz : main.f90 $(MODS)
+	gfortran $? -o $@
 
-clean:
-	rm fizzbuzz simple_fizzbuzz_mod.mod
+$(MODS) : $(wildcard *_mod.f90)
+	gfortran -c $?
+
+.PHONY : clean
+
+clean :
+	rm fizzbuzz *.mod *.o
