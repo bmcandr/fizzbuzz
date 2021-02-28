@@ -61,8 +61,30 @@ function improved_naive_fizzbuzz() {
   }
 }
 
-improved_naive_fizzbuzz();
+// improved_naive_fizzbuzz();
+
 // parameterized_fizzbuzz
+function parameterized_fizzbuzz(rng, triggers) {
+  for (i in rng) {
+    var result = '';
+
+    for (element in triggers) {
+      let [text, trigger(i)] = element;
+      console.log(text)
+      if (trigger(i)){
+        result += text;
+      }
+    }
+    console.log(result || i);
+  }
+}
+
+parameterized_fizzbuzz(
+  [...Array(100).keys()],
+  [['Fizz', x => x % 3 == 0],
+  ['Buzz', x => x % 5 == 0]]
+)
+
 // simple_fp_fizzbuzz
 // complex_fp_fizzbuzz
 // lazy generation
