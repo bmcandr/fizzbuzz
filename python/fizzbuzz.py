@@ -158,7 +158,9 @@ def complex_fp_fizzbuzz(rng: list, triggers: list) -> list:
 
 def lazy_gen_fizzbuzz(start: int=1, end: int=16, triggers: list=[]):
     """
-    This will be an approach that uses functional programming and lazy generation (i.e., enumerators/generators). This approach is more memory safe if you're FizzBuzz-ing into infinity.
+    This will be an approach that uses functional programming and lazy
+    generation (i.e., enumerators/generators). This approach is more memory safe
+    if you're FizzBuzz-ing into infinity.
 
     Pros: it works
           it's concise
@@ -178,6 +180,7 @@ def lazy_gen_fizzbuzz(start: int=1, end: int=16, triggers: list=[]):
     :param end: an integer to end at (default=16)
     :param triggers: a list of dictionaries containing an object and a boolean lambda function
     :return: list
+
     """
 
     i = start
