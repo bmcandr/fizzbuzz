@@ -1,5 +1,11 @@
 from functools import reduce
 
+def printf(value):
+    """
+    Prints value to stdout without newline character.
+    """
+    print(value, end='', flush=True)
+
 
 def naive_fizzbuzz():
     """
@@ -10,7 +16,7 @@ def naive_fizzbuzz():
 
     Pros: it works, BUT...
     Cons: ...only for this limited use case...
-          ...it's repetetive...
+          ...it's repetitive...
 
     Usage:
     >>> naive_fizzbuzz()
@@ -20,14 +26,16 @@ def naive_fizzbuzz():
         mod3 = (i % 3 == 0)
         mod5 = (i % 5 == 0)
 
-        if mod3 and (not mod5):
-            print('Fizz', end=" ")
-        elif mod5 and (not mod3):
-            print('Buzz', end=" ")
-        elif mod3 and mod5:
-            print('FizzBuzz', end=" ")
-        else:
-            print(i, end=" ")
+        if mod3:
+            printf('Fizz')
+
+        if mod5:
+            printf('Buzz')
+
+        if (not mod3) and (not mod5):
+            printf(i)
+
+        printf(' ')
 
 
 def improved_naive_fizzbuzz():
@@ -46,9 +54,6 @@ def improved_naive_fizzbuzz():
     1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz 16 17 Fizz 19 Buzz Fizz 22 23 Fizz Buzz 26 Fizz 28 29 FizzBuzz 31 32 Fizz 34 Buzz Fizz 37 38 Fizz Buzz 41 Fizz 43 44 FizzBuzz 46 47 Fizz 49 Buzz Fizz 52 53 Fizz Buzz 56 Fizz 58 59 FizzBuzz 61 62 Fizz 64 Buzz Fizz 67 68 Fizz Buzz 71 Fizz 73 74 FizzBuzz 76 77 Fizz 79 Buzz Fizz 82 83 Fizz Buzz 86 Fizz 88 89 FizzBuzz 91 92 Fizz 94 Buzz Fizz 97 98 Fizz 
     """
 
-    fizz = 'Fizz'
-    buzz = 'Buzz'
-
     def divisible_by(numerator, denominator):
         return numerator % denominator == 0
 
@@ -56,14 +61,16 @@ def improved_naive_fizzbuzz():
         mod3 = divisible_by(i, 3)
         mod5 = divisible_by(i, 5)
 
-        if mod3 and (not mod5):
-            print(fizz, end=" ")
-        elif mod5 and (not mod3):
-            print(buzz, end=" ")
-        elif mod3 and mod5:
-            print(fizz + buzz, end=" ")
-        else:
-            print(i, end=" ")
+        if mod3:
+            printf('Fizz')
+
+        if mod5:
+            printf('Buzz')
+
+        if (not mod3) and (not mod5):
+            printf(i)
+
+        printf(' ')
 
 
 def parameterized_fizzbuzz(rng: list, triggers: list):
